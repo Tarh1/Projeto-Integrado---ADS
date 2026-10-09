@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vitrine Pro</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <div class="login-page" id="loginPage">
+      <aside class="login-brand">
+        <div class="brand-content">
+          <div class="brand-logo">VITRINE<span>PRO</span></div>
+          <h1>Conecte compras, fornecedores e pedidos em um só lugar.</h1>
+          <p>
+            Centralize fornecedores, acompanhe métricas, organize pedidos e
+            acelere a operação da sua rede comercial.
+          </p>
+        </div>
+      </aside>
+
+      <main class="login-side">
+        <div class="login-card">
+          <h2 id="welcomeTitle">Acesse sua conta</h2>
+          <p class="login-sub">Entre para consultar produtos e administrar sua operação.</p>
+
+          <div class="role-switch">
+            <button class="role-btn active" data-role="cliente">Cliente</button>
+            <button class="role-btn" data-role="fornecedor">Fornecedor</button>
+            <button class="role-btn" data-role="admin">Admin</button>
+          </div>
+
+          <div class="field">
+            <label for="emailInput">E-mail</label>
+            <input id="emailInput" type="email" value="cliente@vitrinepro.com" />
+          </div>
+
+          <div class="field">
+            <label for="passwordInput">Senha</label>
+            <div class="password-wrap">
+              <input id="passwordInput" type="password" value="123456" />
+              <button class="password-toggle" type="button" aria-label="Mostrar senha">👁</button>
+            </div>
+          </div>
+
+          <button class="primary-btn" id="loginBtn">Entrar</button>
+
+          <div class="login-extra">
+            <button class="link" type="button" id="registerBtn">Criar conta</button>
+            <button class="link" type="button" id="forgotBtn">Esqueci a senha</button>
+          </div>
+
+          <div class="demo-note">
+            <div class="demo-access-title">Acesso rápido</div>
+            <div class="demo-access-grid">
+              <button class="demo-access" data-demo="cliente" type="button">
+                <strong>Cliente</strong>
+                <small>Maria Silva</small>
+              </button>
+              <button class="demo-access" data-demo="fornecedor" type="button">
+                <strong>Fornecedor</strong>
+                <small>Grupo Fiori</small>
+              </button>
+              <button class="demo-access" data-demo="admin" type="button">
+                <strong>Admin</strong>
+                <small>Operações</small>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="app" id="appView">
+      <header class="topbar">
+        <div class="logo">Vitrine<span style="color:#171717;">PRO</span></div>
+
+        <nav class="top-nav">
+          <button class="nav-link active" data-panel="marketplace">Marketplace</button>
+          <button class="nav-link" data-panel="suppliers">Fornecedores</button>
+          <button class="nav-link" data-panel="favorites">Favoritos</button>
+          <button class="nav-link" data-panel="admin">Admin</button>
+        </nav>
+
+        <div class="top-actions">
+          <button class="icon-btn" id="settingsBtn" type="button" title="Configurações">⚙️</button>
+          <button class="icon-btn" id="openCartBtn" type="button" title="Carrinho">🛒</button>
+          <div class="account-name">Maria Silva</div>
+          <button class="logout" id="logoutBtn" type="button">Sair</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="hero">
+          <div>
+            <h1>Catálogo de fornecedores</h1>
+            <p>Encontre produtos de qualidade, compare ofertas e monte pedidos em segundos.</p>
+          </div>
+          <div class="hero-badge">
+            <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;">Pedidos hoje</div>
+            <div style="font-size:28px;margin-top:6px;">126</div>
+          </div>
+        </section>
+
+        <div class="search-row">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input id="searchInput" type="text" placeholder="Buscar produtos, marcas ou fornecedores" />
+          </div>
+          <button class="filter-btn" id="filterToggle" type="button">Filtros</button>
+        </div>
+
+        <div class="filter-panel" id="filterPanel">
+          <div class="filter-title">Categorias</div>
+          <div class="filter-options">
+            <button class="filter-chip active" data-filter="Todos" type="button">Todos</button>
+            <button class="filter-chip" data-filter="Bebidas" type="button">Bebidas</button>
+            <button class="filter-chip" data-filter="Café" type="button">Café</button>
+            <button class="filter-chip" data-filter="Laticínios" type="button">Laticínios</button>
+            <button class="filter-chip" data-filter="Bolos" type="button">Bolos</button>
+            <button class="filter-chip" data-filter="Eletrônicos" type="button">Eletrônicos</button>
+            <button class="filter-chip" data-filter="Acessórios" type="button">Acessórios</button>
+          </div>
+        </div>
+
+        <div id="marketplaceSection" class="panel-section">
+          <div class="section-head">
+            <h2>Produtos em destaque</h2>
+            <span id="productCountText">0 itens</span>
+          </div>
+
+          <div id="productGrid" class="product-grid"></div>
+        </div>
+
+        <div id="suppliersSection" class="panel-section" style="display:none;">
+          <div class="section-head">
+            <h2>Diretório de fornecedores</h2>
+            <span>Parceiros verificados</span>
+          </div>
+
+          <div id="supplierGrid" class="supplier-directory-grid"></div>
+        </div>
+
+        <div id="favoritesSection" class="panel-section" style="display:none;">
+          <div class="favorites-head">
+            <div class="section-head" style="margin:0;">
+              <h2>Favoritos</h2>
+            </div>
+          </div>
+          <div class="favorites-tabs">
+            <button class="favorites-tab active" data-favor-tab="produtos" type="button">Produtos</button>
+            <button class="favorites-tab" data-favor-tab="fornecedores" type="button">Fornecedores</button>
+          </div>
+          <div id="favoritesContent"></div>
+        </div>
+
+        <div id="adminSection" class="panel-section" style="display:none;">
+          <div class="admin-dashboard">
+            <div class="admin-stat">
+              <span>Faturamento</span>
+              <strong>R$ 48.2k</strong>
+            </div>
+            <div class="admin-stat">
+              <span>Pedidos</span>
+              <strong>1.284</strong>
+            </div>
+            <div class="admin-stat">
+              <span>Fornecedores</span>
+              <strong>84</strong>
+            </div>
+            <div class="admin-stat">
+              <span>Cancelamentos</span>
+              <strong>19</strong>
+            </div>
+          </div>
+
+          <div class="admin-menu">
+            <button class="active" type="button" data-admin-tab="resumo">Resumo</button>
+            <button type="button" data-admin-tab="pedidos">Pedidos</button>
+            <button type="button" data-admin-tab="clientes">Clientes</button>
+            <button type="button" data-admin-tab="logs">Logs</button>
+          </div>
+
+          <div class="admin-panel active" data-panel-id="resumo">
+            <div class="admin-grid">
+              <div class="admin-card">
+                <h3>Pedidos recentes</h3>
+                <div class="admin-table">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Pedido</th>
+                        <th>Cliente</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>#20481</td>
+                        <td>Maria Silva</td>
+                        <td>R$ 1.280,00</td>
+                        <td><span class="admin-status">Aprovado</span></td>
+                      </tr>
+                      <tr>
+                        <td>#20483</td>
+                        <td>Lucas Rocha</td>
+                        <td>R$ 890,00</td>
+                        <td><span class="admin-status">Em transporte</span></td>
+                      </tr>
+                      <tr>
+                        <td>#20490</td>
+                        <td>Patricia Vale</td>
+                        <td>R$ 2.430,00</td>
+                        <td><span class="admin-status">Pendente</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="admin-card">
+                <h3>Alertas</h3>
+                <div class="admin-table">
+                  <table>
+                    <thead>
+                      <tr><th>Motivo</th><th>Gravidade</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Estoque baixo</td><td><span class="admin-status blocked">Alta</span></td></tr>
+                      <tr><td>Prazo de entrega</td><td><span class="admin-status">Média</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-panel" data-panel-id="pedidos">
+            <div class="admin-card">
+              <h3>Fila de integração</h3>
+              <div class="admin-empty">Sem pendências de integração neste momento.</div>
+            </div>
+          </div>
+
+          <div class="admin-panel" data-panel-id="clientes">
+            <div class="admin-card">
+              <h3>Clientes ativos</h3>
+              <div class="admin-table">
+                <table>
+                  <thead><tr><th>Cliente</th><th>Plano</th><th>Último pedido</th><th>Ações</th></tr></thead>
+                  <tbody>
+                    <tr><td>Maria Silva</td><td>Premium</td><td>Hoje</td><td class="admin-actions"><button>Ver</button><button class="success">Ativar</button></td></tr>
+                    <tr><td>Patricia Vale</td><td>Business</td><td>2 dias</td><td class="admin-actions"><button>Ver</button><button class="danger">Bloquear</button></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-panel" data-panel-id="logs">
+            <div class="admin-card">
+              <h3>Registro de atividade</h3>
+              <div id="adminLogs"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="supplierDashboardSection" class="panel-section" style="display:none;">
+          <div class="section-head">
+            <h2>Minha operação</h2>
+            <span>Visão do fornecedor</span>
+          </div>
+
+          <div class="supplier-dashboard">
+            <div class="supplier-stat"><span>Pedidos</span><strong>312</strong></div>
+            <div class="supplier-stat"><span>Faturamento</span><strong>R$ 28,4k</strong></div>
+            <div class="supplier-stat"><span>Produtos</span><strong>128</strong></div>
+            <div class="supplier-stat"><span>Ativos</span><strong>94%</strong></div>
+          </div>
+
+          <div class="supplier-info-card">
+            <h3 style="margin:0;">Grupo Fiori</h3>
+            <div class="supplier-info-grid">
+              <div class="supplier-info-item">
+                <small>Contato</small>
+                <strong>+55 (11) 98888-4400</strong>
+              </div>
+              <div class="supplier-info-item">
+                <small>Prazo médio</small>
+                <strong>48 horas</strong>
+              </div>
+              <div class="supplier-info-item">
+                <small>Entrega</small>
+                <strong>São Paulo / RJ / SP</strong>
+              </div>
+              <div class="supplier-info-item">
+                <small>Score</small>
+                <strong>4.9 / 5.0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="supplier-actions">
+            <button class="add-btn" type="button">Adicionar produto</button>
+            <button class="secondary-btn" type="button">Exportar planilha</button>
+            <button class="secondary-btn" type="button">Configurações</button>
+          </div>
+
+          <div class="supplier-table-wrap" style="margin-top:24px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Categoria</th>
+                  <th>Estoque</th>
+                  <th>Preço</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Latte Especial</td>
+                  <td>Café</td>
+                  <td>42</td>
+                  <td>R$ 18,90</td>
+                  <td><span class="status">Ativo</span></td>
+                  <td><button class="table-action">Editar</button><button class="table-action delete">Excluir</button></td>
+                </tr>
+                <tr>
+                  <td>Cookie de Chocolate</td>
+                  <td>Bolos</td>
+                  <td>60</td>
+                  <td>R$ 16,50</td>
+                  <td><span class="status">Ativo</span></td>
+                  <td><button class="table-action">Editar</button><button class="table-action delete">Excluir</button></td>
+                </tr>
+                <tr>
+                  <td>Kit de Chás</td>
+                  <td>Bebidas</td>
+                  <td>18</td>
+                  <td>R$ 54,00</td>
+                  <td><span class="status">Ativo</span></td>
+                  <td><button class="table-action">Editar</button><button class="table-action delete">Excluir</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Carrinho de compras">
+      <div class="cart-head">
+        <h3>Carrinho</h3>
+        <button class="cart-close" id="closeCartBtn" type="button">×</button>
+      </div>
+
+      <div class="cart-note">
+        Frete grátis em compras acima de R$ 350,00. Seu pedido será conferido antes de envio.
+      </div>
+
+      <div class="cart-items" id="cartItems"></div>
+
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cartTotal">R$ 0,00</span>
+        </div>
+        <button class="simulate-btn" id="simulateBtn" type="button">Simular pedido</button>
+        <div class="simulation-result" id="simulationResult"></div>
+      </div>
+    </aside>
+
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+
+    <div class="modal-backdrop" id="settingsModal">
+      <div class="modal settings-modal">
+        <div class="modal-head">
+          <h3>Configurações</h3>
+          <button class="close-btn" id="closeSettingsBtn" type="button">×</button>
+        </div>
+
+        <div class="settings-tabs">
+          <button class="settings-tab active" data-settings-tab="perfil" type="button">Perfil</button>
+          <button class="settings-tab" data-settings-tab="seguranca" type="button">Segurança</button>
+          <button class="settings-tab" data-settings-tab="preferencias" type="button">Preferências</button>
+          <button class="settings-tab" data-settings-tab="ajuda" type="button">Ajuda</button>
+        </div>
+
+        <div class="settings-panel active" data-settings-panel="perfil">
+          <div class="settings-grid">
+            <div>
+              <div class="field">
+                <label>Nome</label>
+                <input type="text" value="Maria Silva" />
+              </div>
+            </div>
+            <div>
+              <div class="field">
+                <label>Empresa</label>
+                <input type="text" value="Sabor & Co." />
+              </div>
+            </div>
+          </div>
+          <div class="settings-section-title">Interesses</div>
+          <div class="interest-item">
+            <div>
+              <strong>Produtos de café</strong>
+              <small>Preferência ativa</small>
+            </div>
+            <div class="interest-actions">
+              <button type="button">Editar</button>
+              <button type="button">Remover</button>
+            </div>
+          </div>
+          <div class="interest-item">
+            <div>
+              <strong>Itens premium</strong>
+              <small>Notificações</small>
+            </div>
+            <div class="interest-actions">
+              <button type="button">Editar</button>
+              <button type="button">Remover</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-panel" data-settings-panel="seguranca">
+          <div class="security-card">
+            <strong>Autenticação</strong>
+            <span>2FA ativada para sua conta.</span>
+            <span>Último acesso: 08/10/2026 às 08:45</span>
+          </div>
+          <div class="security-card">
+            <strong>Senhas</strong>
+            <span>Recomendação: troque sua senha a cada 90 dias.</span>
+          </div>
+        </div>
+
+        <div class="settings-panel" data-settings-panel="preferencias">
+          <div class="setting-check">
+            <input type="checkbox" checked />
+            <span>Receber notificações de ofertas</span>
+          </div>
+          <div class="setting-check">
+            <input type="checkbox" checked />
+            <span>Notificar vencimento de estoque</span>
+          </div>
+          <div class="setting-check">
+            <input type="checkbox" />
+            <span>Modo escuro</span>
+          </div>
+          <div class="settings-note">As preferências são salvas automaticamente e afetam sua experiência no marketplace.</div>
+        </div>
+
+        <div class="settings-panel" data-settings-panel="ajuda">
+          <details open>
+            <summary>Como funciona o marketplace</summary>
+            <p>Você pode buscar produtos, comparar fornecedores, adicionar itens ao carrinho e visualizar históricos de pedidos em poucos cliques.</p>
+          </details>
+          <details>
+            <summary>Como criar um pedido</summary>
+            <p>Escolha os itens desejados, revise o carrinho e clique em simular pedido para obter a visualização final antes da compra.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
